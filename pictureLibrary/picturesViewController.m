@@ -142,6 +142,15 @@
 {
 	if (index!=_index)
 	{
+		for (pageView *page in pages)
+		{
+			if (page.pageIdx==index)
+			{
+				[page setZoomScale:1.0 animated:NO];
+				break;
+			}
+		}
+		
 		prewIndex = index;
 		index = _index;
 	}
