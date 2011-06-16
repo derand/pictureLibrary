@@ -12,6 +12,7 @@
 @interface pageView : UIScrollView <UIScrollViewDelegate>
 {
 	imageBackgroundView *ibv;
+	UIView *zoomedPiece;
 	
 	CGFloat rScale;
 	CGFloat previousScale;

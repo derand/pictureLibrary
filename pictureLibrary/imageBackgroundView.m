@@ -13,48 +13,30 @@
 @synthesize scale;
 @synthesize delegate;
 
-- (id)initWithFrame:(CGRect)frame
+- (id) initWithFrame:(CGRect) frame
 {
     self = [super initWithFrame:frame];
     if (self)
 	{
         // Initialization code
-//		self.clearsContextBeforeDrawing = YES;
+		self.clearsContextBeforeDrawing = YES;
 		scale = 1.0;
 		image = nil;
     }
     return self;
 }
 
-- (void) drawRect:(CGRect) rect
+- (void) drawRect:(CGRect) rct
 {
-//	NSLog(@"%s %fx%f %fx%f", __FUNCTION__, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-/*	
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetLineWidth(context, 1);
-	
-	CGMutablePathRef path;
-	path = CGPathCreateMutable();
-	CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y);
-	CGPathAddLineToPoint(path, NULL, rect.origin.x+rect.size.width, rect.origin.y+rect.size.height);
-	CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y+rect.size.height);
-	CGPathAddLineToPoint(path, NULL, rect.origin.x+rect.size.width, rect.origin.y);
-	CGContextAddPath(context, path);
-	CGContextSetFillColorWithColor(context, [UIColor colorWithRed:102.0/256.0 green:5.0/256.0 blue:90.0/256 alpha:.95].CGColor);
-	CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
-	CGContextDrawPath(context, kCGPathFillStroke);
-	CGPathRelease(path);
-
-	
-	return ;
-*/	
 	if (!image)
 		return ;
+	
+	NSLog(@"reDraw: %fx%f, %fx%f", rct.origin.x, rct.origin.y, rct.size.width, rct.size.height);
 	
 	[image drawInRect:[self imageRect]];
 }
 
-- (void)dealloc
+- (void) dealloc
 {
 	self.image = nil;
     [super dealloc];
@@ -88,6 +70,7 @@
 	return rv;
 }
 
+/*
 - (void) setFrame:(CGRect)frame
 {
 	BOOL needRedraw = fabs(self.frame.size.width-frame.size.width)>.5 || fabs(self.frame.size.height-frame.size.height)>.5;
@@ -98,7 +81,7 @@
 //		[self setNeedsDisplayInRect:CGRectMake(0.0, 0.0, 50.0, 50.0)];
 	}
 }
-
+*/
 - (void) setImage:(UIImage *) _image
 {
 	[image release];
@@ -114,12 +97,12 @@
 
 #pragma mark touches
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void) touchesBegan:(NSSet *) touches withEvent:(UIEvent *) event
 {
 	move = NO;
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (void) touchesEnded:(NSSet *) touches withEvent:(UIEvent *) event
 {
 	if (!move)
 	{
@@ -130,23 +113,22 @@
 	}
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+- (void) touchesMoved:(NSSet *) touches withEvent:(UIEvent *) event
 {
 	move = YES;
 }	
 
 
 #pragma mark transform
-/*
-- (void)setTransformWithoutScaling:(CGAffineTransform)newTransform
+
+- (void) setTransformWithoutScaling:(CGAffineTransform) newTransform
 {
     [super setTransform:newTransform];
 }
 
-
-- (void)setTransform:(CGAffineTransform)newValue
+- (void) setTransform:(CGAffineTransform) newValue
 {
     [super setTransform:CGAffineTransformScale(newValue, 1.0 / scale, 1.0 / scale)];
 }
-*/
+
 @end

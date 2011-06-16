@@ -34,12 +34,18 @@
 		
 		ibv = [[imageBackgroundView alloc] initWithFrame:self.bounds];
 		[self addSubview:ibv];
+		
+		zoomedPiece = [[UIView alloc] initWithFrame:CGRectMake(50.0, 50.0, 100.0, 100.0)];
+		zoomedPiece.alpha = 0.0;
+		zoomedPiece.backgroundColor = [UIColor yellowColor];
+		[self addSubview:zoomedPiece];
 	}
 	return self;
 }
 
 - (void) dealloc
 {
+	[zoomedPiece release];
 	[ibv release];
 	
 	[super dealloc];
@@ -89,17 +95,18 @@
 	}
 	else
 	{
-		NSLog(@"%s %d", __FUNCTION__, decelerate);
 		CGRect rct = ibv.frame;
-		NSLog(@"%fx%f, %fx%f (%f %f)", rct.origin.x, rct.origin.y, rct.size.width, rct.size.height, scrollView.contentOffset.x, scrollView.contentOffset.y);
+		rct.origin = scrollView.contentOffset;
+		rct.size = scrollView.bounds.size;
+		NSLog(@"need reDraw %fx%f, %fx%f", rct.origin.x, rct.origin.y, rct.size.width, rct.size.height);
+//		[ibv setNeedsDisplayInRect:rct];
 	}
 }
 
 - (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *) view atScale:(float) scale
 {
-	ibv.scale = scale;
-
-	return ;
+//	ibv.scale = scale;
+//	return ;
 /*	
 	[ibv setTransformWithoutScaling:CGAffineTransformIdentity];
 
@@ -122,6 +129,8 @@
 	previousScale = rScale;
 	NSLog(@"scale:%.4f rscale:%.4f minScale:%.4f maxScale:%.4f", scale, rScale, scrollView.minimumZoomScale, scrollView.maximumZoomScale);
 */
+	[self scrollViewDidEndDragging:scrollView willDecelerate:NO];
+
 }
 
 - (void) scrollViewDidZoom:(UIScrollView *)scrollView

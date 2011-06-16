@@ -28,7 +28,7 @@
 @property (nonatomic, assign) CGFloat scale;
 @property (nonatomic, assign) id<imageBackgroundViewDelegate> delegate;
 
-//- (void)setTransformWithoutScaling:(CGAffineTransform)newTransform;
+- (void) setTransformWithoutScaling:(CGAffineTransform) newTransform;
 
 - (CGRect) imageRect;
 
