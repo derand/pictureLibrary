@@ -56,12 +56,20 @@
 
 - (void) setImage:(UIImage *) _image
 {
+	self.zoomScale = 1.0;
+	
 	ibv.image = _image;
+
 }
 
 - (UIImage *) image
 {
 	return ibv.image;
+}
+
+- (void) waitDecelerate
+{
+	[self scrollViewDidEndDragging:self willDecelerate:self.decelerating];
 }
 
 
@@ -70,12 +78,44 @@
 - (UIView *) viewForZoomingInScrollView:(UIScrollView *) scrollView
 {
 	return ibv;
-//	return iv;
 }
 
-/*
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale
+- (void) scrollViewDidEndDragging:(UIScrollView *) scrollView willDecelerate:(BOOL) decelerate
 {
+	
+	if (decelerate)
+	{
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(wait) object:nil];
+		[self performSelector:@selector(waitDecelerate) withObject:nil afterDelay:.05];
+	}
+	else
+	{
+		NSLog(@"%s %d", __FUNCTION__, decelerate);
+		CGRect rct = ibv.frame;
+		NSLog(@"%fx%f, %fx%f (%f %f)", rct.origin.x, rct.origin.y, rct.size.width, rct.size.height, scrollView.contentOffset.x, scrollView.contentOffset.y);
+	}
+}
+
+- (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *) view atScale:(float) scale
+{
+	ibv.scale = scale;
+
+	CGRect rct = [ibv imageRect];
+	UIEdgeInsets edgeInset = UIEdgeInsetsZero;
+	if (rct.size.width*scale>self.bounds.size.width)
+	{
+		edgeInset.left = -rct.origin.x*scale;
+		edgeInset.right = edgeInset.left;
+	}
+	if (rct.size.height*scale>self.bounds.size.height)
+	{
+		edgeInset.top = -rct.origin.y*scale;
+		edgeInset.bottom = edgeInset.top;
+	}
+
+	self.contentInset = edgeInset;
+	return ;
+/*	
 	[ibv setTransformWithoutScaling:CGAffineTransformIdentity];
 
 	CGSize sz = scrollView.bounds.size; 
@@ -96,7 +136,7 @@
 	ibv.scale = 1.0;
 	previousScale = rScale;
 	NSLog(@"scale:%.4f rscale:%.4f minScale:%.4f maxScale:%.4f", scale, rScale, scrollView.minimumZoomScale, scrollView.maximumZoomScale);
-}
 */
+}
  
 @end

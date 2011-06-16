@@ -26,7 +26,7 @@
     return self;
 }
 
-- (void)drawRect:(CGRect)rect
+- (void) drawRect:(CGRect) rect
 {
 //	NSLog(@"%s %fx%f %fx%f", __FUNCTION__, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
 /*	
@@ -50,26 +50,8 @@
 */	
 	if (!image)
 		return ;
-		
-	CGSize sz = image.size;
-	CGRect rct = self.bounds;
-	if (fabs(sz.width)>.5 && fabs(sz.height)>.5)
-	{
-		CGFloat aspectImg = sz.width/sz.height;
-		CGFloat aspectScreen = rct.size.width/rct.size.height;
-		if (aspectImg>aspectScreen)
-		{
-			sz = CGSizeMake(rct.size.width, sz.height*rct.size.width/sz.width);
-		}
-		else
-		{
-			sz = CGSizeMake(sz.width*rct.size.height/sz.height, rct.size.height);
-		}
-		rct.origin = CGPointMake((rct.size.width-sz.width)/2.0, (rct.size.height-sz.height)/2.0);
-		rct.size = sz;
-	}
 	
-	[image drawInRect:rct];
+	[image drawInRect:[self imageRect]];
 }
 
 - (void)dealloc
@@ -79,6 +61,32 @@
 }
 
 #pragma mark -
+
+- (CGRect) imageRect
+{
+	CGRect rv = CGRectZero;
+	if (!image)
+		return rv;
+	
+	CGSize sz = image.size;
+	rv = self.bounds;
+	if (fabs(sz.width)>.5 && fabs(sz.height)>.5)
+	{
+		CGFloat aspectImg = sz.width/sz.height;
+		CGFloat aspectScreen = rv.size.width/rv.size.height;
+		if (aspectImg>aspectScreen)
+		{
+			sz = CGSizeMake(rv.size.width, sz.height*rv.size.width/sz.width);
+		}
+		else
+		{
+			sz = CGSizeMake(sz.width*rv.size.height/sz.height, rv.size.height);
+		}
+		rv.origin = CGPointMake((rv.size.width-sz.width)/2.0, (rv.size.height-sz.height)/2.0);
+		rv.size = sz;
+	}
+	return rv;
+}
 
 - (void) setFrame:(CGRect)frame
 {
@@ -97,6 +105,11 @@
 	image = [_image retain];
 	
 	[self setNeedsDisplay];
+}
+
+- (void) setScale:(CGFloat) _scale
+{
+	scale = _scale;
 }
 
 #pragma mark touches
@@ -124,7 +137,7 @@
 
 
 #pragma mark transform
-
+/*
 - (void)setTransformWithoutScaling:(CGAffineTransform)newTransform
 {
     [super setTransform:newTransform];
@@ -135,5 +148,5 @@
 {
     [super setTransform:CGAffineTransformScale(newValue, 1.0 / scale, 1.0 / scale)];
 }
-
+*/
 @end
