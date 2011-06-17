@@ -70,7 +70,7 @@
 	return rv;
 }
 
-/*
+
 - (void) setFrame:(CGRect)frame
 {
 	BOOL needRedraw = fabs(self.frame.size.width-frame.size.width)>.5 || fabs(self.frame.size.height-frame.size.height)>.5;
@@ -81,7 +81,7 @@
 //		[self setNeedsDisplayInRect:CGRectMake(0.0, 0.0, 50.0, 50.0)];
 	}
 }
-*/
+
 - (void) setImage:(UIImage *) _image
 {
 	[image release];

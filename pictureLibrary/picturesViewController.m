@@ -29,6 +29,8 @@
     self = [super init];
     if (self)
 	{
+		self.wantsFullScreenLayout = YES;
+
 		count = 0;
 		index = 0;
 		prewIndex = -1;
