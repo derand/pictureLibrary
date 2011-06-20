@@ -31,7 +31,7 @@
 	if (!image)
 		return ;
 	
-	NSLog(@"reDraw: %fx%f, %fx%f", rct.origin.x, rct.origin.y, rct.size.width, rct.size.height);
+//	NSLog(@"reDraw: %fx%f, %fx%f", rct.origin.x, rct.origin.y, rct.size.width, rct.size.height);
 	
 	[image drawInRect:[self imageRect]];
 }
