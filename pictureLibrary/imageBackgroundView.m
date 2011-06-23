@@ -12,6 +12,8 @@
 @synthesize image;
 @synthesize scale;
 @synthesize delegate;
+@synthesize parent;
+
 
 - (id) initWithFrame:(CGRect) frame
 {
@@ -90,10 +92,6 @@
 	[self setNeedsDisplay];
 }
 
-- (void) setScale:(CGFloat) _scale
-{
-	scale = _scale;
-}
 
 #pragma mark touches
 

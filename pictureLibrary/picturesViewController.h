@@ -15,6 +15,7 @@
 - (NSInteger) picturesViewControllerPicturesCount:(picturesViewController *) sender;
 @optional
 - (UIImage *) picturesViewController:(picturesViewController *) sender imageById:(NSInteger) idx;
+//- (UIImage *) picturesViewController:(picturesViewController *) sender imageById:(NSInteger) idx withZoom:(CGFloat) zoom;
 - (void) picturesViewController:(picturesViewController *) sender changeImageTo:(NSInteger) idx;
 @end
 

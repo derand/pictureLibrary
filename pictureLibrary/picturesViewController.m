@@ -341,6 +341,8 @@
 	[self willAnimateRotationToInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation duration:.0];
 }
 
+
+
 #pragma mark UIScrollViewDelegate
 
 - (void) scrollViewDidScroll:(UIScrollView *) sender

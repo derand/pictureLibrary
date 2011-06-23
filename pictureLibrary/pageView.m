@@ -8,6 +8,13 @@
 #import "pageView.h"
 #import "imageBackgroundView.h"
 
+
+@interface pageView ()
+- (BOOL) equalZoom:(CGFloat) zoom;
+@end
+
+
+
 @implementation pageView
 @synthesize ibv;
 @synthesize pageIdx;
@@ -33,6 +40,7 @@
 		rScale = previousScale = 1.0;
 		
 		ibv = [[imageBackgroundView alloc] initWithFrame:self.bounds];
+		ibv.parent = self;
 		[self addSubview:ibv];
 		
 		zoomedPiece = [[UIView alloc] initWithFrame:CGRectMake(50.0, 50.0, 100.0, 100.0)];
@@ -56,8 +64,10 @@
 - (void) setFrame:(CGRect) frame
 {
 	[super setFrame:frame];
+	self.zoomScale = 1.0;
 
-	ibv.frame = CGRectMake(0.0, 0.0, MAX(self.contentSize.width, self.bounds.size.width), MAX(self.contentSize.height, self.bounds.size.height));
+//	ibv.frame = CGRectMake(0.0, 0.0, MAX(self.contentSize.width, self.bounds.size.width), MAX(self.contentSize.height, self.bounds.size.height));
+	ibv.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height);
 }
 
 - (void) setImage:(UIImage *) _image
@@ -65,7 +75,6 @@
 	self.zoomScale = 1.0;
 	
 	ibv.image = _image;
-
 }
 
 - (UIImage *) image
@@ -77,6 +86,12 @@
 {
 	[self scrollViewDidEndDragging:self willDecelerate:self.decelerating];
 }
+
+- (BOOL) equalZoom:(CGFloat) zoom
+{
+	return fabs(self.zoomScale-zoom)<.03;
+}
+
 
 #pragma mark UIScrollViewDelegate
 
@@ -105,7 +120,7 @@
 
 - (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *) view atScale:(float) scale
 {
-//	ibv.scale = scale;
+	ibv.scale = scale;
 //	return ;
 /*	
 	[ibv setTransformWithoutScaling:CGAffineTransformIdentity];
