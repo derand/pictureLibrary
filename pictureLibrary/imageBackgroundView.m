@@ -116,7 +116,7 @@
 	move = YES;
 }	
 
-
+/*
 #pragma mark transform
 
 - (void) setTransformWithoutScaling:(CGAffineTransform) newTransform
@@ -128,5 +128,6 @@
 {
     [super setTransform:CGAffineTransformScale(newValue, 1.0 / scale, 1.0 / scale)];
 }
+*/
 
 @end

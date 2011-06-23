@@ -33,7 +33,7 @@
 @property (nonatomic, assign) id<imageBackgroundViewDelegate> delegate;
 @property (nonatomic, assign) pageView *parent;
 
-- (void) setTransformWithoutScaling:(CGAffineTransform) newTransform;
+//- (void) setTransformWithoutScaling:(CGAffineTransform) newTransform;
 
 - (CGRect) imageRect;
 
