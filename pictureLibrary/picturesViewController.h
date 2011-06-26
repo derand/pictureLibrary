@@ -39,12 +39,14 @@
 	UIBarStyle savedBarStyle;
 	UIStatusBarStyle savedStatusBarStyle;
 	BOOL showed;
+	UIToolbar *toolBar;
 }
 
 @property (nonatomic, assign) id<picturesViewControllerDelegate> delegate;
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, assign) NSInteger count;
 @property (nonatomic, assign) NSInteger pagesWindow;
+@property (nonatomic, retain) UIToolbar *toolBar;
 
 - (void) reloadData;
 - (void) setIndex:(NSInteger) _index animated:(BOOL) animated;

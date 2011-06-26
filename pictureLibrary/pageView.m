@@ -10,7 +10,6 @@
 
 
 @interface pageView ()
-- (BOOL) equalZoom:(CGFloat) zoom;
 @end
 
 
@@ -40,7 +39,6 @@
 		rScale = previousScale = 1.0;
 		
 		ibv = [[imageBackgroundView alloc] initWithFrame:self.bounds];
-		ibv.parent = self;
 		[self addSubview:ibv];
 		
 		zoomedPiece = [[UIView alloc] initWithFrame:CGRectMake(50.0, 50.0, 100.0, 100.0)];
@@ -67,12 +65,12 @@
 	self.zoomScale = 1.0;
 
 //	ibv.frame = CGRectMake(0.0, 0.0, MAX(self.contentSize.width, self.bounds.size.width), MAX(self.contentSize.height, self.bounds.size.height));
-	ibv.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height);
+	ibv.frame = self.bounds;
 }
 
 - (void) setImage:(UIImage *) _image
 {
-	self.zoomScale = 1.0;
+//	self.zoomScale = 1.0;
 	
 	ibv.image = _image;
 }
@@ -87,15 +85,6 @@
 	[self scrollViewDidEndDragging:self willDecelerate:self.decelerating];
 }
 
-- (BOOL) equalZoom:(CGFloat) zoom
-{
-	return fabs(self.zoomScale-zoom)<.03;
-}
-
-- (void) setZoomScale:(float)zoomScale
-{
-	[super setZoomScale:zoomScale];
-}
 
 #pragma mark UIScrollViewDelegate
 
@@ -116,7 +105,7 @@
 		CGRect rct = ibv.frame;
 		rct.origin = scrollView.contentOffset;
 		rct.size = scrollView.bounds.size;
-//		NSLog(@"need reDraw %fx%f, %fx%f", rct.origin.x, rct.origin.y, rct.size.width, rct.size.height);
+		NSLog(@"need reDraw %fx%f, %fx%f", rct.origin.x, rct.origin.y, rct.size.width, rct.size.height);
 //		[ibv setNeedsDisplayInRect:rct];
 	}
 }
@@ -125,9 +114,8 @@
 {
 	NSLog(@"%s %f", __FUNCTION__, scale);
 	ibv.scale = scale;
-//	return ;
-	
 
+	
 	CGRect rct = [ibv imageRect];
 	UIEdgeInsets edgeInset = UIEdgeInsetsZero;
 	if (rct.size.width*self.zoomScale>self.bounds.size.width)

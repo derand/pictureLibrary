@@ -12,7 +12,6 @@
 @synthesize image;
 @synthesize scale;
 @synthesize delegate;
-@synthesize parent;
 
 
 - (id) initWithFrame:(CGRect) frame

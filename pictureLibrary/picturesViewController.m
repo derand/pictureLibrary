@@ -23,6 +23,7 @@
 @synthesize pagesView;
 @synthesize index, count;
 @synthesize pagesWindow;
+@synthesize toolBar;
 
 - (id) init
 {
@@ -330,7 +331,7 @@
 }
 
 
-#pragma mark imageBackgroundView *ibv;
+#pragma mark imageBackgroundViewDelegate;
 
 - (void) imageBackgroundViewSingleTouch:(imageBackgroundView *) ibv
 {
