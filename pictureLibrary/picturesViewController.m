@@ -15,6 +15,7 @@
 
 - (void) freeMemmoryWithAbs:(NSInteger) diff;
 - (pageView *) pageByIdx:(NSInteger) idx;
+- (void) setToolBarFrame;
 @end
 
 
@@ -330,6 +331,31 @@
 	}
 }
 
+- (void) setToolBar:(UIToolbar *) _toolBar
+{
+	[toolBar removeFromSuperview];
+	[toolBar release];
+	toolBar = [_toolBar retain];
+	
+	[self setToolBarFrame];
+	[self.view addSubview:toolBar];
+}
+
+- (void) setToolBarFrame
+{
+	if (!toolBar)
+		return;
+
+    CGRect screenRect = self.view.bounds;
+	CGRect rct = toolBar.frame;
+	rct = CGRectMake(0.0, screenRect.size.height, screenRect.size.width, rct.size.height);
+	if (showed)
+	{
+		rct.origin.y -= rct.size.height;
+	}
+	toolBar.frame = rct;
+}
+
 
 #pragma mark imageBackgroundViewDelegate;
 
@@ -338,6 +364,12 @@
 	[[UIApplication sharedApplication] setStatusBarHidden:showed withAnimation:UIStatusBarAnimationSlide];
 	[self.navigationController setNavigationBarHidden:showed animated:YES];
 	showed = !showed;
+	[UIView animateWithDuration:.5f
+					 animations:^{
+						 [self setToolBarFrame];
+					 }
+					 completion:^(BOOL finished) {
+					 }];
 	
 	[self willAnimateRotationToInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation duration:.0];
 }
@@ -372,6 +404,7 @@
 	self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 	[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackTranslucent;
 	showed = YES;
+	[self setToolBarFrame];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -405,7 +438,8 @@
 		rct.origin.x = (page.pageIdx-pageStart)*rct.size.width;
 		page.frame = rct;
 	}
-	
+
+	[self setToolBarFrame];
 }
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
