@@ -40,6 +40,9 @@
 		pageStart= pageEnd = 0;
 		
 		pages = [[NSMutableArray alloc] init];
+		pagesView = nil;
+		progRotation = NO;
+
     }
     return self;
 }
@@ -337,8 +340,15 @@
 	[toolBar release];
 	toolBar = [_toolBar retain];
 	
+	toolBar.translucent = YES;
+	toolBar.tintColor = [UIColor blackColor];
+	
+	
 	[self setToolBarFrame];
-	[self.view addSubview:toolBar];
+	if (pagesView)
+	{
+		[self.view addSubview:toolBar];
+	}
 }
 
 - (void) setToolBarFrame
@@ -346,7 +356,6 @@
 	if (!toolBar)
 		return;
 
-    CGRect screenRect = self.view.bounds;
 	CGRect rct = toolBar.frame;
 	rct = CGRectMake(0.0, screenRect.size.height, screenRect.size.width, rct.size.height);
 	if (showed)
@@ -354,6 +363,8 @@
 		rct.origin.y -= rct.size.height;
 	}
 	toolBar.frame = rct;
+
+	NSLog(@"%f", toolBar.frame.origin.y);
 }
 
 
@@ -364,14 +375,16 @@
 	[[UIApplication sharedApplication] setStatusBarHidden:showed withAnimation:UIStatusBarAnimationSlide];
 	[self.navigationController setNavigationBarHidden:showed animated:YES];
 	showed = !showed;
-	[UIView animateWithDuration:.5f
+	[UIView animateWithDuration:.3f
 					 animations:^{
 						 [self setToolBarFrame];
 					 }
 					 completion:^(BOOL finished) {
 					 }];
-	
+
+	progRotation = YES;
 	[self willAnimateRotationToInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation duration:.0];
+	progRotation = NO;
 }
 
 
@@ -421,7 +434,8 @@
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
 										  duration:(NSTimeInterval) duration
 {
-    CGRect screenRect = self.view.bounds;
+    screenRect = self.view.bounds;
+	NSLog(@"%fx%f", screenRect.size.width, screenRect.size.height);
 
 	CGRect rct = [[UIScreen mainScreen] bounds];
 	self.view.frame = rct;
@@ -439,7 +453,10 @@
 		page.frame = rct;
 	}
 
-	[self setToolBarFrame];
+	if (!progRotation)
+	{
+		[self setToolBarFrame];
+	}
 }
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -451,8 +468,8 @@
 	UIView *contentView = [[UIView alloc] initWithFrame:applicationFrame];
 	
 	// important for view orientation rotation
-	contentView.autoresizesSubviews = YES;
-	contentView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);	
+//	contentView.autoresizesSubviews = YES;
+	contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;	
 	self.view = contentView;	
 	[contentView release];
 	
@@ -467,6 +484,11 @@
     pagesView.scrollsToTop = NO;
 	[self.view addSubview:pagesView];
 //	pagesView.scrollEnabled = NO;
+	
+	if (toolBar)
+	{
+		[self.view addSubview:toolBar];
+	}
 
     [self performSelector:@selector(checkSize) withObject:nil afterDelay:.05];
 }

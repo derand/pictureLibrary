@@ -40,6 +40,8 @@
 	UIStatusBarStyle savedStatusBarStyle;
 	BOOL showed;
 	UIToolbar *toolBar;
+	CGRect screenRect;
+	BOOL progRotation;
 }
 
 @property (nonatomic, assign) id<picturesViewControllerDelegate> delegate;
