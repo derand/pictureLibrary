@@ -17,6 +17,9 @@
 - (UIImage *) picturesViewController:(picturesViewController *) sender imageById:(NSInteger) idx;
 //- (UIImage *) picturesViewController:(picturesViewController *) sender imageById:(NSInteger) idx withZoom:(CGFloat) zoom;
 - (void) picturesViewController:(picturesViewController *) sender changeImageTo:(NSInteger) idx;
+
+- (void) picturesViewController:(picturesViewController *) sender changeInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+					   duration:(NSTimeInterval) duration frame:(CGRect) frame;
 @end
 
 

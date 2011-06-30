@@ -457,6 +457,14 @@
 	{
 		[self setToolBarFrame];
 	}
+	
+	if (delegate && [delegate respondsToSelector:@selector(picturesViewController:changeInterfaceOrientation:duration:frame:)])
+	{
+		[delegate picturesViewController:self
+			  changeInterfaceOrientation:interfaceOrientation
+								duration:duration
+								   frame:screenRect];
+	}
 }
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
