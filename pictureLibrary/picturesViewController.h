@@ -20,6 +20,8 @@
 
 - (void) picturesViewController:(picturesViewController *) sender changeInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
 					   duration:(NSTimeInterval) duration frame:(CGRect) frame;
+
+- (NSString *) picturesViewController:(picturesViewController *) sender titleForImage:(NSInteger) idx;
 @end
 
 
@@ -41,7 +43,7 @@
 	
 	UIBarStyle savedBarStyle;
 	UIStatusBarStyle savedStatusBarStyle;
-	BOOL showed;
+	BOOL barsShowed;
 	UIToolbar *toolBar;
 	CGRect screenRect;
 	BOOL progRotation;
@@ -52,9 +54,12 @@
 @property (nonatomic, assign) NSInteger count;
 @property (nonatomic, assign) NSInteger pagesWindow;
 @property (nonatomic, retain) UIToolbar *toolBar;
+@property (nonatomic, readonly) BOOL barsShowed;
 
 - (void) reloadData;
 - (void) setIndex:(NSInteger) _index animated:(BOOL) animated;
 - (void) setImage:(UIImage *) _image forIndex:(NSInteger) idx;
+
+- (void) addSubview:(UIView *) subview;
 
 @end

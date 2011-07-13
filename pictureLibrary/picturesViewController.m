@@ -24,7 +24,7 @@
 @synthesize pagesView;
 @synthesize index, count;
 @synthesize pagesWindow;
-@synthesize toolBar;
+@synthesize toolBar, barsShowed;
 
 - (id) init
 {
@@ -49,8 +49,13 @@
 
 - (void)dealloc
 {
-	self.count = 0;
+	for (pageView *page in pages)
+	{
+		[page removeFromSuperview];
+	}
 	[pages release];
+	pages = nil;
+	self.count = 0;
 
     [super dealloc];
 }
@@ -133,13 +138,20 @@
 	[self loadPage:index-1];
 	[self loadPage:index+1];
 	
-	if (infinitiCount)
+	if (delegate && [delegate respondsToSelector:@selector(picturesViewController:titleForImage:)])
 	{
-		self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%d/∞", @""), index+1];
+		self.navigationItem.title = [delegate picturesViewController:self titleForImage:index];
 	}
 	else
 	{
-		self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%d/%d", @""), index+1, count];
+		if (infinitiCount)
+		{
+			self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%d/∞", @""), index+1];
+		}
+		else
+		{
+			self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%d/%d", @""), index+1, count];
+		}
 	}
 	
 	[self freeMemmoryWithAbs:3];
@@ -189,51 +201,58 @@
 			pagesView.contentSize = size;
 		}
 		
-		NSMutableArray *__pages = [[NSMutableArray alloc] initWithCapacity:pageEnd-pageStart];
-		pageView *page;
-		CGRect rct = CGRectMake(0.0, 0.0, pagesView.bounds.size.width, pagesView.bounds.size.height);
-		for (NSInteger i=pageStart; i<pageEnd; i++)
+		if (pageEnd<pageStart)
 		{
-			NSInteger j=[pages count];
-			BOOL founded = NO;
-			while (j-->0)
+			pageStart = pageEnd;
+		}
+		if (pages)
+		{
+			NSMutableArray *__pages = [[NSMutableArray alloc] initWithCapacity:pageEnd-pageStart];
+			pageView *page;
+			CGRect rct = CGRectMake(0.0, 0.0, pagesView.bounds.size.width, pagesView.bounds.size.height);
+			for (NSInteger i=pageStart; i<pageEnd; i++)
 			{
-				page = [pages objectAtIndex:j];
-				if (page.pageIdx==i)
+				NSInteger j=[pages count];
+				BOOL founded = NO;
+				while (j-->0)
 				{
-					[__pages addObject:page];
-					[pages removeObjectAtIndex:j];
-					founded = YES;
-					break;
+					page = [pages objectAtIndex:j];
+					if (page.pageIdx==i)
+					{
+						[__pages addObject:page];
+						[pages removeObjectAtIndex:j];
+						founded = YES;
+						break;
+					}
 				}
+				if (!founded)
+				{
+					page = [[pageView alloc] initWithFrame:CGRectZero];
+					page.pageIdx = i;
+					page.ibv.delegate = self;
+					[__pages addObject:page];
+					[pagesView addSubview:page];
+					[page release];
+				}
+				
+				rct.origin.x = (i-pageStart)*rct.size.width;
+				page.frame = rct;
 			}
-			if (!founded)
+			for (pageView *page in pages)
 			{
-				page = [[pageView alloc] initWithFrame:CGRectZero];
-				page.pageIdx = i;
-				page.ibv.delegate = self;
-				[__pages addObject:page];
-				[pagesView addSubview:page];
-				[page release];
+				[page removeFromSuperview];
 			}
-			
-			rct.origin.x = (i-pageStart)*rct.size.width;
-			page.frame = rct;
+			[pages removeAllObjects];
+			[pages release];
+			pages = __pages;
 		}
-		for (pageView *page in pages)
-		{
-			[page removeFromSuperview];
-		}
-		[pages removeAllObjects];
-		[pages release];
-		pages = __pages;
 		
 		offset.x = (index-pageStart)*pagesView.bounds.size.width;
 		[pagesView setContentOffset:offset animated:animated];
 	}
 	
 
-	if (delegate && [delegate respondsToSelector:@selector(picturesViewController:changeImageTo:)])
+	if (delegate && [delegate respondsToSelector:@selector(picturesViewController:changeImageTo:)] && pages)
 	{
 		[delegate picturesViewController:self changeImageTo:index];
 	}
@@ -358,23 +377,27 @@
 
 	CGRect rct = toolBar.frame;
 	rct = CGRectMake(0.0, screenRect.size.height, screenRect.size.width, rct.size.height);
-	if (showed)
+	if (barsShowed)
 	{
 		rct.origin.y -= rct.size.height;
 	}
 	toolBar.frame = rct;
-
-	NSLog(@"%f", toolBar.frame.origin.y);
 }
+
+- (void) addSubview:(UIView *) subview
+{
+	[self.view addSubview:subview];
+}
+
 
 
 #pragma mark imageBackgroundViewDelegate;
 
 - (void) imageBackgroundViewSingleTouch:(imageBackgroundView *) ibv
 {
-	[[UIApplication sharedApplication] setStatusBarHidden:showed withAnimation:UIStatusBarAnimationSlide];
-	[self.navigationController setNavigationBarHidden:showed animated:YES];
-	showed = !showed;
+	[[UIApplication sharedApplication] setStatusBarHidden:barsShowed withAnimation:UIStatusBarAnimationSlide];
+	[self.navigationController setNavigationBarHidden:barsShowed animated:YES];
+	barsShowed = !barsShowed;
 	[UIView animateWithDuration:.3f
 					 animations:^{
 						 [self setToolBarFrame];
@@ -416,7 +439,7 @@
 	savedStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
 	self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 	[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackTranslucent;
-	showed = YES;
+	barsShowed = YES;
 	[self setToolBarFrame];
 }
 
@@ -435,7 +458,7 @@
 										  duration:(NSTimeInterval) duration
 {
     screenRect = self.view.bounds;
-	NSLog(@"%fx%f", screenRect.size.width, screenRect.size.height);
+//	NSLog(@"%fx%f", screenRect.size.width, screenRect.size.height);
 
 	CGRect rct = [[UIScreen mainScreen] bounds];
 	self.view.frame = rct;
