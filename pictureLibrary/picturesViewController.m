@@ -12,6 +12,7 @@
 
 @interface picturesViewController ()
 @property (nonatomic, retain) UIScrollView *pagesView;
+@property (nonatomic, retain) UIButton *titleBtn;
 
 - (void) freeMemmoryWithAbs:(NSInteger) diff;
 - (pageView *) pageByIdx:(NSInteger) idx;
@@ -25,6 +26,7 @@
 @synthesize index, count;
 @synthesize pagesWindow;
 @synthesize toolBar, barsShowed;
+@synthesize titleBtn;
 
 - (id) init
 {
@@ -62,6 +64,26 @@
 
 
 #pragma mark -
+
+- (void) setNavigationTitle:(NSString *) title
+{
+//	self.navigationItem.title = title;
+	
+	CGSize sz = [title sizeWithFont:titleBtn.titleLabel.font];
+	CGRect rct = CGRectMake(0.0, 0.0, sz.width+10.0, sz.height+10.0);
+	rct.origin.x = (self.navigationController.navigationBar.frame.size.width-rct.size.width)/2.0;
+	rct.origin.y = (self.navigationController.navigationBar.frame.size.height-rct.size.height)/2.0;
+	titleBtn.frame = rct;
+	[titleBtn setTitle:title forState:UIControlStateNormal];
+}
+
+- (void) titleButtonAction:(UIButton *) sender
+{
+	if ([delegate respondsToSelector:@selector(picturesViewController:titleTouched:)])
+	{
+		[delegate picturesViewController:self titleTouched:index];
+	}
+}
 
 - (void) reloadData
 {
@@ -140,17 +162,17 @@
 	
 	if (delegate && [delegate respondsToSelector:@selector(picturesViewController:titleForImage:)])
 	{
-		self.navigationItem.title = [delegate picturesViewController:self titleForImage:index];
+		[self setNavigationTitle:[delegate picturesViewController:self titleForImage:index]];
 	}
 	else
 	{
 		if (infinitiCount)
 		{
-			self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%d/∞", @""), index+1];
+			[self setNavigationTitle:[NSString stringWithFormat:NSLocalizedString(@"%d/∞", @""), index+1]];
 		}
 		else
 		{
-			self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%d/%d", @""), index+1, count];
+			[self setNavigationTitle:[NSString stringWithFormat:NSLocalizedString(@"%d/%d", @""), index+1, count]];
 		}
 	}
 	
@@ -520,6 +542,13 @@
 	{
 		[self.view addSubview:toolBar];
 	}
+	
+	self.titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	titleBtn.titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+//	titleBtn.backgroundColor = [UIColor colorWithRed:0.56 green:0.77 blue:0.34 alpha:1.0];
+	[titleBtn setTitle:NSLocalizedString(@"View Tracking Info", @"") forState:UIControlStateNormal];
+	[titleBtn addTarget:self action:@selector(titleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+	self.navigationItem.titleView = titleBtn;
 
     [self performSelector:@selector(checkSize) withObject:nil afterDelay:.05];
 }
@@ -545,6 +574,8 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 	
+	self.titleBtn = nil;
+	self.toolBar = nil;
 }
 
 - (void) didReceiveMemoryWarning

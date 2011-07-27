@@ -7,20 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A506CD4A13E084670085E13A /* tagsView.h in Headers */ = {isa = PBXBuildFile; fileRef = A506CD4613E084670085E13A /* tagsView.h */; };
+		A506CD4B13E084670085E13A /* tagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = A506CD4713E084670085E13A /* tagsView.m */; };
+		A506CD4C13E084670085E13A /* tagTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A506CD4813E084670085E13A /* tagTableCell.h */; };
+		A506CD4D13E084670085E13A /* tagTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A506CD4913E084670085E13A /* tagTableCell.m */; };
 		A5143308139AB4AC00E84A0C /* picturesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5143306139AB4AC00E84A0C /* picturesViewController.h */; };
 		A5143309139AB4AC00E84A0C /* picturesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5143307139AB4AC00E84A0C /* picturesViewController.m */; };
 		A5143366139AC25E00E84A0C /* pageView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5143364139AC25E00E84A0C /* pageView.h */; };
 		A5143367139AC25E00E84A0C /* pageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5143365139AC25E00E84A0C /* pageView.m */; };
+		A542440713E08FFE00EE4097 /* abstractView.h in Headers */ = {isa = PBXBuildFile; fileRef = A542440513E08FFE00EE4097 /* abstractView.h */; };
+		A542440813E08FFE00EE4097 /* abstractView.m in Sources */ = {isa = PBXBuildFile; fileRef = A542440613E08FFE00EE4097 /* abstractView.m */; };
 		A5688447139EB00C003D4CA6 /* imageBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5688445139EB00C003D4CA6 /* imageBackgroundView.h */; };
 		A5688448139EB00C003D4CA6 /* imageBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5688446139EB00C003D4CA6 /* imageBackgroundView.m */; };
 		A5DEAE79139A9214000D8D8B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DEAE78139A9214000D8D8B /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A506CD4613E084670085E13A /* tagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tagsView.h; sourceTree = "<group>"; };
+		A506CD4713E084670085E13A /* tagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tagsView.m; sourceTree = "<group>"; };
+		A506CD4813E084670085E13A /* tagTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tagTableCell.h; sourceTree = "<group>"; };
+		A506CD4913E084670085E13A /* tagTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tagTableCell.m; sourceTree = "<group>"; };
 		A5143306139AB4AC00E84A0C /* picturesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picturesViewController.h; sourceTree = "<group>"; };
 		A5143307139AB4AC00E84A0C /* picturesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = picturesViewController.m; sourceTree = "<group>"; };
 		A5143364139AC25E00E84A0C /* pageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pageView.h; sourceTree = "<group>"; };
 		A5143365139AC25E00E84A0C /* pageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pageView.m; sourceTree = "<group>"; };
+		A542440513E08FFE00EE4097 /* abstractView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = abstractView.h; sourceTree = "<group>"; };
+		A542440613E08FFE00EE4097 /* abstractView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = abstractView.m; sourceTree = "<group>"; };
 		A5688445139EB00C003D4CA6 /* imageBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageBackgroundView.h; sourceTree = "<group>"; };
 		A5688446139EB00C003D4CA6 /* imageBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageBackgroundView.m; sourceTree = "<group>"; };
 		A5DEAE75139A9214000D8D8B /* libpictureLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpictureLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +52,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A506CD4413E0844B0085E13A /* tags */ = {
+			isa = PBXGroup;
+			children = (
+				A506CD4613E084670085E13A /* tagsView.h */,
+				A506CD4713E084670085E13A /* tagsView.m */,
+				A506CD4813E084670085E13A /* tagTableCell.h */,
+				A506CD4913E084670085E13A /* tagTableCell.m */,
+			);
+			name = tags;
+			sourceTree = "<group>";
+		};
+		A542440A13E0900900EE4097 /* view's */ = {
+			isa = PBXGroup;
+			children = (
+				A542440513E08FFE00EE4097 /* abstractView.h */,
+				A542440613E08FFE00EE4097 /* abstractView.m */,
+				A506CD4413E0844B0085E13A /* tags */,
+			);
+			name = "view's";
+			sourceTree = "<group>";
+		};
 		A5DEAE6A139A9213000D8D8B = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +102,7 @@
 		A5DEAE7A139A9214000D8D8B /* pictureLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				A542440A13E0900900EE4097 /* view's */,
 				A5688445139EB00C003D4CA6 /* imageBackgroundView.h */,
 				A5688446139EB00C003D4CA6 /* imageBackgroundView.m */,
 				A5143364139AC25E00E84A0C /* pageView.h */,
@@ -98,6 +132,9 @@
 				A5143308139AB4AC00E84A0C /* picturesViewController.h in Headers */,
 				A5143366139AC25E00E84A0C /* pageView.h in Headers */,
 				A5688447139EB00C003D4CA6 /* imageBackgroundView.h in Headers */,
+				A506CD4A13E084670085E13A /* tagsView.h in Headers */,
+				A506CD4C13E084670085E13A /* tagTableCell.h in Headers */,
+				A542440713E08FFE00EE4097 /* abstractView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +191,9 @@
 				A5143309139AB4AC00E84A0C /* picturesViewController.m in Sources */,
 				A5143367139AC25E00E84A0C /* pageView.m in Sources */,
 				A5688448139EB00C003D4CA6 /* imageBackgroundView.m in Sources */,
+				A506CD4B13E084670085E13A /* tagsView.m in Sources */,
+				A506CD4D13E084670085E13A /* tagTableCell.m in Sources */,
+				A542440813E08FFE00EE4097 /* abstractView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

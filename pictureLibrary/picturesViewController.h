@@ -11,8 +11,11 @@
 
 @class picturesViewController;
 
+
 @protocol picturesViewControllerDelegate <NSObject>
+
 - (NSInteger) picturesViewControllerPicturesCount:(picturesViewController *) sender;
+
 @optional
 - (UIImage *) picturesViewController:(picturesViewController *) sender imageById:(NSInteger) idx;
 //- (UIImage *) picturesViewController:(picturesViewController *) sender imageById:(NSInteger) idx withZoom:(CGFloat) zoom;
@@ -22,6 +25,7 @@
 					   duration:(NSTimeInterval) duration frame:(CGRect) frame;
 
 - (NSString *) picturesViewController:(picturesViewController *) sender titleForImage:(NSInteger) idx;
+- (void) picturesViewController:(picturesViewController *) sender titleTouched:(NSInteger) idx;
 @end
 
 
@@ -47,6 +51,8 @@
 	UIToolbar *toolBar;
 	CGRect screenRect;
 	BOOL progRotation;
+	
+	UIButton *titleBtn;
 }
 
 @property (nonatomic, assign) id<picturesViewControllerDelegate> delegate;
