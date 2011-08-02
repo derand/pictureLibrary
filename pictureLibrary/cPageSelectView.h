@@ -8,12 +8,25 @@
 
 #import <UIKit/UIKit.h>
 #import "abstractView.h"
+#import "MultiDialViewController.h"
 
-@interface cPageSelectView : abstractView <UIPickerViewDelegate, UIPickerViewDataSource>
+
+@class cPageSelectView;
+
+@protocol cPageSelectViewDelegate <NSObject>
+- (void) pageSelectView:(cPageSelectView *) psv didSelectPage:(NSInteger) page;
+@end
+
+
+@interface cPageSelectView : abstractView <UIPickerViewDelegate, UIPickerViewDataSource, MultiDialViewControllerDelegate>
 {
 	UIPickerView *pv;
+	MultiDialViewController *mdvc;
+	
+	id<cPageSelectViewDelegate> delegate;
 }
 
-
+@property (nonatomic, assign) NSInteger page;
+@property (nonatomic, assign) id<cPageSelectViewDelegate> delegate;
 
 @end

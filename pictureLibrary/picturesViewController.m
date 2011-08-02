@@ -185,6 +185,9 @@
 
 - (void) setIndex:(NSInteger) _index animated:(BOOL) animated
 {
+	if (count>=0 && _index>=count)
+		return ;
+	
 	if (index!=_index)
 	{
 		for (pageView *page in pages)
@@ -410,9 +413,18 @@
 	toolBar.frame = rct;
 }
 
-- (void) addSubview:(UIView *) subview
+- (void) addSubview:(abstractView *) subview
 {
-	[self.view addSubview:subview];
+	if ([subview isKindOfClass:[abstractView class]])
+	{
+		subview.parent = self;
+		[subview setViewSizeInFrame:screenRect];
+		[subview showInView:self.view animated:YES];
+	}
+	else
+	{
+		[self.view addSubview:subview];
+	}
 }
 
 - (void) checkViewsSize

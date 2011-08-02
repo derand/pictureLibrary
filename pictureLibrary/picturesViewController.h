@@ -10,6 +10,7 @@
 
 
 @class picturesViewController;
+@class abstractView;
 
 
 @protocol picturesViewControllerDelegate <NSObject>
@@ -66,6 +67,6 @@
 - (void) setIndex:(NSInteger) _index animated:(BOOL) animated;
 - (void) setImage:(UIImage *) _image forIndex:(NSInteger) idx;
 
-- (void) addSubview:(UIView *) subview;
+- (void) addSubview:(abstractView *) subview;
 
 @end

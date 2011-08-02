@@ -12,7 +12,7 @@
 
 
 #define SHOW_DURATION	.3
-
+#define BORDER_DIFF		10.0
 
 
 @implementation abstractView
@@ -101,13 +101,46 @@
 {
 	_savedFrame = frame;
 	CGSize sz = self.needSize;
-	sz.height = MIN(sz.height, frame.size.height-20.0-2.5*(parent.barsShowed?parent.toolBar.frame.size.height:0.0));
-	CGRect rct = CGRectMake(frame.size.width-20.0-sz.width, frame.size.height-sz.height-10.0,
-							sz.width, sz.height);
+	sz.height = MIN(sz.height, frame.size.height-2.0*BORDER_DIFF-2.5*(parent.barsShowed?parent.toolBar.frame.size.height:0.0));
+	CGRect rct = CGRectZero;
+	rct.size = sz;
+	switch (self.horizontalAlign)
+	{
+		case horizontalViewAlignLeft:
+			rct.origin.x = BORDER_DIFF;
+			break;
+		case horizontalViewAlignCenter:
+			rct.origin.x = (frame.size.width-sz.width)/2.0;
+			break;
+		case horizontalViewAlignRight:
+			rct.origin.x = frame.size.width-BORDER_DIFF-sz.width;
+			break;
+			
+		default:
+			break;
+	}
+	switch (self.verticalAlign)
+	{
+		case verticalViewAlignTop:
+			rct.origin.y = BORDER_DIFF + (parent.barsShowed?parent.navigationController.navigationBar.frame.size.height*1.5:0.0);
+			break;
+		case verticalViewAlignCenter:
+			rct.origin.y = (frame.size.height-sz.height)/2.0;
+			break;
+		case verticalViewAlignBottom :
+			rct.origin.y = frame.size.height -BORDER_DIFF - sz.height - (parent.barsShowed?parent.toolBar.frame.size.height:0.0);
+			break;
+			
+		default:
+			break;
+	}
+/*	
+	CGRectMake(frame.size.width-BORDER_DIFF-sz.width, frame.size.height-sz.height-BORDER_DIFF, sz.width, sz.height);
 	if (parent.barsShowed)
 	{
 		rct.origin.y -= parent.toolBar.frame.size.height;
 	}
+*/
 	self.frame = rct;
 	
 	[self setNeedsDisplay];

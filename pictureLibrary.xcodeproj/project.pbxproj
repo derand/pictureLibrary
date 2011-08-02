@@ -21,6 +21,12 @@
 		A5688448139EB00C003D4CA6 /* imageBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5688446139EB00C003D4CA6 /* imageBackgroundView.m */; };
 		A586C2D513E71E03003962EF /* cPageSelectView.h in Headers */ = {isa = PBXBuildFile; fileRef = A586C2D313E71E03003962EF /* cPageSelectView.h */; };
 		A586C2D613E71E03003962EF /* cPageSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A586C2D413E71E03003962EF /* cPageSelectView.m */; };
+		A586C2E613E83BA6003962EF /* DialController.h in Headers */ = {isa = PBXBuildFile; fileRef = A586C2E013E83BA6003962EF /* DialController.h */; };
+		A586C2E713E83BA6003962EF /* DialController.m in Sources */ = {isa = PBXBuildFile; fileRef = A586C2E113E83BA6003962EF /* DialController.m */; };
+		A586C2E813E83BA6003962EF /* GlowLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = A586C2E213E83BA6003962EF /* GlowLabel.h */; };
+		A586C2E913E83BA6003962EF /* GlowLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A586C2E313E83BA6003962EF /* GlowLabel.m */; };
+		A586C2EA13E83BA6003962EF /* MultiDialViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A586C2E413E83BA6003962EF /* MultiDialViewController.h */; };
+		A586C2EB13E83BA6003962EF /* MultiDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A586C2E513E83BA6003962EF /* MultiDialViewController.m */; };
 		A5DEAE79139A9214000D8D8B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DEAE78139A9214000D8D8B /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +45,12 @@
 		A5688446139EB00C003D4CA6 /* imageBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageBackgroundView.m; sourceTree = "<group>"; };
 		A586C2D313E71E03003962EF /* cPageSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cPageSelectView.h; sourceTree = "<group>"; };
 		A586C2D413E71E03003962EF /* cPageSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cPageSelectView.m; sourceTree = "<group>"; };
+		A586C2E013E83BA6003962EF /* DialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialController.h; sourceTree = "<group>"; };
+		A586C2E113E83BA6003962EF /* DialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialController.m; sourceTree = "<group>"; };
+		A586C2E213E83BA6003962EF /* GlowLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlowLabel.h; sourceTree = "<group>"; };
+		A586C2E313E83BA6003962EF /* GlowLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlowLabel.m; sourceTree = "<group>"; };
+		A586C2E413E83BA6003962EF /* MultiDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiDialViewController.h; sourceTree = "<group>"; };
+		A586C2E513E83BA6003962EF /* MultiDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiDialViewController.m; sourceTree = "<group>"; };
 		A5DEAE75139A9214000D8D8B /* libpictureLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpictureLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DEAE78139A9214000D8D8B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A5DEAE7C139A9214000D8D8B /* pictureLibrary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pictureLibrary-Prefix.pch"; sourceTree = "<group>"; };
@@ -81,10 +93,24 @@
 		A586C2D113E71D9B003962EF /* pages */ = {
 			isa = PBXGroup;
 			children = (
+				A586C2DF13E83B6F003962EF /* infiniti picker */,
 				A586C2D313E71E03003962EF /* cPageSelectView.h */,
 				A586C2D413E71E03003962EF /* cPageSelectView.m */,
 			);
 			name = pages;
+			sourceTree = "<group>";
+		};
+		A586C2DF13E83B6F003962EF /* infiniti picker */ = {
+			isa = PBXGroup;
+			children = (
+				A586C2E013E83BA6003962EF /* DialController.h */,
+				A586C2E113E83BA6003962EF /* DialController.m */,
+				A586C2E213E83BA6003962EF /* GlowLabel.h */,
+				A586C2E313E83BA6003962EF /* GlowLabel.m */,
+				A586C2E413E83BA6003962EF /* MultiDialViewController.h */,
+				A586C2E513E83BA6003962EF /* MultiDialViewController.m */,
+			);
+			name = "infiniti picker";
 			sourceTree = "<group>";
 		};
 		A5DEAE6A139A9213000D8D8B = {
@@ -150,6 +176,9 @@
 				A506CD4C13E084670085E13A /* cTagTableCell.h in Headers */,
 				A542440713E08FFE00EE4097 /* abstractView.h in Headers */,
 				A586C2D513E71E03003962EF /* cPageSelectView.h in Headers */,
+				A586C2E613E83BA6003962EF /* DialController.h in Headers */,
+				A586C2E813E83BA6003962EF /* GlowLabel.h in Headers */,
+				A586C2EA13E83BA6003962EF /* MultiDialViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +239,9 @@
 				A506CD4D13E084670085E13A /* cTagTableCell.m in Sources */,
 				A542440813E08FFE00EE4097 /* abstractView.m in Sources */,
 				A586C2D613E71E03003962EF /* cPageSelectView.m in Sources */,
+				A586C2E713E83BA6003962EF /* DialController.m in Sources */,
+				A586C2E913E83BA6003962EF /* GlowLabel.m in Sources */,
+				A586C2EB13E83BA6003962EF /* MultiDialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

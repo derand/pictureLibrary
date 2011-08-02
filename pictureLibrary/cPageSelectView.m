@@ -8,7 +8,10 @@
 
 #import "cPageSelectView.h"
 
+
+
 @implementation cPageSelectView
+@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -16,21 +19,50 @@
     if (self)
 	{
         // Initialization code
+		self.backgroundColor = [UIColor clearColor];
+		self.verticalAlign = verticalViewAlignTop;
+		self.horizontalAlign = horizontalViewAlignCenter;
 		
 		pv = [[UIPickerView alloc] initWithFrame:CGRectZero];
 		pv.showsSelectionIndicator = YES;
-    }
+		pv.delegate = self;
+		pv.dataSource = self;
+//		[self addSubview:pv];
+
+        mdvc = [[MultiDialViewController alloc] init];
+		mdvc.delegate = self;
+//		mdvc.view.frame = CGRectOffset(mdvc.view.frame, 0.0, 340.0);
+		[self addSubview:mdvc.view];
+	}
     return self;
 }
 
-/*
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
+	CGRect rct = self.bounds;
+	
+	CGFloat minx = CGRectGetMinX(rct), midx = CGRectGetMidX(rct), maxx = CGRectGetMaxX(rct);
+	CGFloat miny = CGRectGetMinY(rct), midy = CGRectGetMidY(rct), maxy = CGRectGetMaxY(rct);
+	CGFloat cornerRadius = 10.0;
+	
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGContextSetLineWidth(context, 1);
+	CGMutablePathRef path = CGPathCreateMutable();
+	CGPathMoveToPoint(path, NULL, minx + 0.5f, midy + 0.5f);
+	CGPathAddArcToPoint(path, NULL, minx + 0.5f, miny + 0.5f, midx + 0.5f, miny + 0.5f, cornerRadius);
+	CGPathAddArcToPoint(path, NULL, maxx + 0.5f, miny + 0.5f, maxx + 0.5f, midy + 0.5f, cornerRadius);
+	CGPathAddArcToPoint(path, NULL, maxx + 0.5f, maxy + 0.5f, midx + 0.5f, maxy + 0.5f, cornerRadius);
+	CGPathAddArcToPoint(path, NULL, minx + 0.5f, maxy + 0.5f, minx + 0.5f, midy + 0.5f, cornerRadius);
+	CGPathAddArcToPoint(path, NULL, minx + 0.5f, midy + 0.5f, minx + 0.5f, midy + 0.5f, cornerRadius);
+	CGContextAddPath(context, path);
+	CGContextSetFillColorWithColor(context, [UIColor colorWithWhite:.1 alpha:.5].CGColor);
+	CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:.1 alpha:0.65].CGColor);
+	CGContextDrawPath(context, kCGPathFillStroke);
+	CGPathRelease(path);
 }
-*/
 
 - (void) dealloc
 {
@@ -46,13 +78,25 @@
 	[super setFrame:frame];
 	
 	pv.frame = self.bounds;
+	mdvc.view.frame = self.bounds;
+	
+	[self setNeedsDisplay];
 }
 
 - (CGSize) needSize
 {
-	return CGSizeMake(280.0, pv.frame.size.height);
+	return CGSizeMake(60.0*4+10.0*2, 120.0);
 }
 
+- (void) setPage:(NSInteger) page
+{
+	mdvc.number = page;
+}
+
+- (NSInteger) page
+{
+	return mdvc.number;
+}
 
 #pragma mark PickerDelegate
 
@@ -72,7 +116,16 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-	return 10;
+	return -1;
+}
+#pragma mark MultiDialViewControllerDelegate methods
+
+- (void)multiDialViewController:(MultiDialViewController *)controller didSelectString:(NSString *)string
+{
+	if (delegate)
+	{
+		[delegate pageSelectView:self didSelectPage:controller.number];
+	}
 }
 
 @end
