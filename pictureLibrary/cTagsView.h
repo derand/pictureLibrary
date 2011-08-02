@@ -13,7 +13,7 @@
 @class cTag;
 
 
-@interface tagsView : abstractView <UITableViewDataSource, UITableViewDelegate>
+@interface cTagsView : UIView <UITableViewDataSource, UITableViewDelegate>
 {
 	UITableView *tv;
 	

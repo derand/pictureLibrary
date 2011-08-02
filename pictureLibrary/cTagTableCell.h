@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface tagTableCell : UITableViewCell
+@interface cTagTableCell : UITableViewCell
 {
 	UILabel *nameLabel;
 }

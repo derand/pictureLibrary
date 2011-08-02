@@ -6,8 +6,8 @@
 //  Copyright 2011 interMobile. All rights reserved.
 //
 
-#import "tagsView.h"
-#import "tagTableCell.h"
+#import "cTagsView.h"
+#import "cTagTableCell.h"
 
 
 
@@ -17,12 +17,12 @@
 
 
 
-@interface tagsView ()
+@interface cTagsView ()
 @property (nonatomic, retain) UITableView *tv;
 @end
 
 
-@implementation tagsView
+@implementation cTagsView
 @synthesize tv;
 @synthesize tags;
 
@@ -108,7 +108,7 @@
 			tag = ((cTag *)tmp).tag;
 		}
 
-		tmpSz = [tagTableCell sizeForTag:tag];
+		tmpSz = [cTagTableCell sizeForTag:tag];
 		rv.width = MAX(tmpSz.width, rv.width);
 		rv.height += tmpSz.height;
 	}
@@ -131,13 +131,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	tagTableCell *rv = nil;
+	cTagTableCell *rv = nil;
 	
 	static NSString *cellID = @"tagCell_ID";
 	rv = [tableView dequeueReusableCellWithIdentifier:cellID];
 	if (rv == nil)
 	{
-		rv = [[[tagTableCell alloc] initWithReuseIdentifier:cellID] autorelease];
+		rv = [[[cTagTableCell alloc] initWithReuseIdentifier:cellID] autorelease];
 	}
 	id<NSObject> tmp = [tags objectAtIndex:indexPath.row];
 	NSString *tag = (NSString *)tmp;
@@ -169,7 +169,7 @@
 	{
 		tag = ((cTag *)tmp).tag;
 	}
-	rv = [tagTableCell sizeForTag:tag].height;
+	rv = [cTagTableCell sizeForTag:tag].height;
 	return rv;
 }
 

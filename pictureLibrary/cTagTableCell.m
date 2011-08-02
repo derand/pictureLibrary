@@ -6,19 +6,19 @@
 //  Copyright 2011 interMobile. All rights reserved.
 //
 
-#import "tagTableCell.h"
+#import "cTagTableCell.h"
 
 
 #define TEXT_FONT	[UIFont boldSystemFontOfSize:12.0]
 
 
-@interface tagTableCell ()
+@interface cTagTableCell ()
 @property (nonatomic, retain) UILabel *nameLabel;
 @end
 
 
 
-@implementation tagTableCell
+@implementation cTagTableCell
 @synthesize nameLabel;
 
 #pragma mark lifeCycle
