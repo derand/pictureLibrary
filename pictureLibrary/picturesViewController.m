@@ -8,6 +8,7 @@
 #import "picturesViewController.h"
 #import "pageView.h"
 #import "imageBackgroundView.h"
+#import "abstractView.h"
 
 
 @interface picturesViewController ()
@@ -17,6 +18,9 @@
 - (void) freeMemmoryWithAbs:(NSInteger) diff;
 - (pageView *) pageByIdx:(NSInteger) idx;
 - (void) setToolBarFrame;
+
+- (void) checkViewsSize;
+
 @end
 
 
@@ -411,6 +415,17 @@
 	[self.view addSubview:subview];
 }
 
+- (void) checkViewsSize
+{
+	for (UIView *view in self.view.subviews)
+	{
+		if ([view isKindOfClass:[abstractView class]])
+		{
+			abstractView *av = (abstractView *)view;
+			[av setViewSizeInFrame:screenRect];
+		}
+	}
+}
 
 
 #pragma mark imageBackgroundViewDelegate;
@@ -431,8 +446,6 @@
 	[self willAnimateRotationToInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation duration:.0];
 	progRotation = NO;
 }
-
-
 
 #pragma mark UIScrollViewDelegate
 
@@ -503,6 +516,7 @@
 		[self setToolBarFrame];
 	}
 	
+	[self checkViewsSize];
 	if (delegate && [delegate respondsToSelector:@selector(picturesViewController:changeInterfaceOrientation:duration:frame:)])
 	{
 		[delegate picturesViewController:self
