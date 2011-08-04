@@ -61,6 +61,7 @@ static const int kGlowLabelTag = 2011;
         self.tableView.showsHorizontalScrollIndicator = NO;
         self.tableView.separatorColor = [UIColor colorWithRed:110.0/255.0 green:110.0/255.0 blue:110.0/255.0 alpha:1.0];
         self.tableView.backgroundColor = [UIColor colorWithRed:44.0/255.0 green:44.0/255.0 blue:44.0/255.0 alpha:.8];
+		self.tableView.scrollsToTop = NO;
         [self.view addSubview:self.tableView];
         
         //INIT
@@ -107,6 +108,9 @@ static const int kGlowLabelTag = 2011;
 }
 
 - (void)spinToString:(NSString *)string {
+	if ([string isEqualToString:self.selectedString])
+		return ;
+
     isAnimating = NO;
     self.isSpinning = NO;
     if ([[self.tableView visibleCells] count] == 0) {

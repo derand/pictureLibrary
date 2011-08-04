@@ -48,6 +48,7 @@
 		pages = [[NSMutableArray alloc] init];
 		pagesView = nil;
 		progRotation = NO;
+		loaded = NO;
 
     }
     return self;
@@ -185,6 +186,11 @@
 
 - (void) setIndex:(NSInteger) _index animated:(BOOL) animated
 {
+	if (count==0 && delegate)
+	{
+		self.count = [delegate picturesViewControllerPicturesCount:self];
+	}
+	
 	if (count>=0 && _index>=count)
 		return ;
 	
@@ -296,7 +302,7 @@
 
 - (void) setCount:(NSInteger) _count
 {
-	if (_count<-1 || count==_count)
+	if (_count<-1 || (count==_count && loaded))
 		return ;
 	
 	count = _count;
@@ -575,6 +581,7 @@
 	[titleBtn setTitle:NSLocalizedString(@"View Tracking Info", @"") forState:UIControlStateNormal];
 	[titleBtn addTarget:self action:@selector(titleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
 	self.navigationItem.titleView = titleBtn;
+	loaded = NO;
 
     [self performSelector:@selector(checkSize) withObject:nil afterDelay:.05];
 }
@@ -584,6 +591,7 @@
     [self willAnimateRotationToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:.0];
 	
 	[self reloadData];
+	loaded = YES;
 }
 
 /*

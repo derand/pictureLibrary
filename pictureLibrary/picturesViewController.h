@@ -54,6 +54,7 @@
 	BOOL progRotation;
 	
 	UIButton *titleBtn;
+	BOOL loaded;
 }
 
 @property (nonatomic, assign) id<picturesViewControllerDelegate> delegate;

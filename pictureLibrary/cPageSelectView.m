@@ -90,7 +90,10 @@
 
 - (void) setPage:(NSInteger) page
 {
-	mdvc.number = page;
+	if (mdvc.number!=page)
+	{
+		mdvc.number = page;
+	}
 }
 
 - (NSInteger) page
