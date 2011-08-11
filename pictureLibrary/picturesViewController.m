@@ -11,6 +11,9 @@
 #import "abstractView.h"
 
 
+#define ANIMATION_DURATION	.3f
+
+
 @interface picturesViewController ()
 @property (nonatomic, retain) UIScrollView *pagesView;
 @property (nonatomic, retain) UIButton *titleBtn;
@@ -433,16 +436,24 @@
 	}
 }
 
-- (void) checkViewsSize
+- (void) checkViewsSizeAnimated:(BOOL) animated
 {
 	for (UIView *view in self.view.subviews)
 	{
 		if ([view isKindOfClass:[abstractView class]])
 		{
 			abstractView *av = (abstractView *)view;
-			[av setViewSizeInFrame:screenRect];
+			[UIView animateWithDuration:animated?ANIMATION_DURATION:.0f
+							 animations:^{
+								 [av setViewSizeInFrame:screenRect];
+							 }];
 		}
 	}
+}
+
+- (void) checkViewsSize
+{
+	[self checkViewsSizeAnimated:NO];
 }
 
 
@@ -453,7 +464,7 @@
 	[[UIApplication sharedApplication] setStatusBarHidden:barsShowed withAnimation:UIStatusBarAnimationSlide];
 	[self.navigationController setNavigationBarHidden:barsShowed animated:YES];
 	barsShowed = !barsShowed;
-	[UIView animateWithDuration:.3f
+	[UIView animateWithDuration:ANIMATION_DURATION
 					 animations:^{
 						 [self setToolBarFrame];
 					 }
@@ -534,7 +545,7 @@
 		[self setToolBarFrame];
 	}
 	
-	[self checkViewsSize];
+	[self checkViewsSizeAnimated:YES];
 	if (delegate && [delegate respondsToSelector:@selector(picturesViewController:changeInterfaceOrientation:duration:frame:)])
 	{
 		[delegate picturesViewController:self

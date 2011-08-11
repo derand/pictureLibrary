@@ -121,14 +121,44 @@
 {
 	return -1;
 }
+
+#pragma mark -
+
+- (void) changeNumber
+{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeNumber) object:nil];
+	
+	if (mdvc.isContentMoving)
+	{
+		[self performSelector:@selector(changeNumber) withObject:nil afterDelay:1.0];
+	}
+	else
+	{
+		if (delegate)
+		{
+			[delegate pageSelectView:self didSelectPage:mdvc.number];
+		}
+	}
+}
+
 #pragma mark MultiDialViewControllerDelegate methods
+
+- (void) multiDialViewControllerStartScroll:(MultiDialViewController *)controller
+{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeNumber) object:nil];
+}
 
 - (void)multiDialViewController:(MultiDialViewController *)controller didSelectString:(NSString *)string
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeNumber) object:nil];
+
+	[self performSelector:@selector(changeNumber) withObject:nil afterDelay:1.0];
+/*	
 	if (delegate)
 	{
 		[delegate pageSelectView:self didSelectPage:controller.number];
 	}
+*/
 }
 
 @end

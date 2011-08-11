@@ -156,6 +156,11 @@ static const int kGlowLabelTag = 2011;
     }
 }
 
+- (BOOL) isContentMoving
+{
+	return tableView.dragging || tableView.decelerating;
+}
+
 /*
 #pragma mark UITableViewDelegate methods
 
@@ -212,6 +217,14 @@ static const int kGlowLabelTag = 2011;
 }
 
 #pragma mark UIScrollViewDelegate methods
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+	if (!isSpinning)
+	{
+		[self.delegate dialControllerDidStartDragiing:self];
+	}
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {    
     self.isSpinning = YES;

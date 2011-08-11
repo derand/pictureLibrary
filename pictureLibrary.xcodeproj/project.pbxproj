@@ -208,6 +208,7 @@
 		A5DEAE6C139A9213000D8D8B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = interMobile;
 			};
 			buildConfigurationList = A5DEAE6F139A9213000D8D8B /* Build configuration list for PBXProject "pictureLibrary" */;

@@ -97,19 +97,33 @@
 	return atoi([selectedString cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
+- (BOOL) isContentMoving
+{
+	return self.dial1.isContentMoving || self.dial2.isContentMoving || self.dial3.isContentMoving || self.dial4.isContentMoving;
+}
+
 #pragma mark DialControllerDelegate methods
+
+- (void) dialControllerDidStartDragiing:(DialController *)dial
+{
+	NSLog(@"%s", __FUNCTION__);
+	[self.delegate multiDialViewControllerStartScroll:self];
+}
 
 - (void)dialControllerDidSpin:(DialController *)dial {
     //...
 }
 
 - (void)dialController:(DialController *)dial didSnapToString:(NSString *)value {
-    NSLog(@"%@>%@", [self class], NSStringFromSelector(_cmd));
+//    NSLog(@"%@>%@", [self class], NSStringFromSelector(_cmd));
     
-    if (!self.dial1.isSpinning && !self.dial2.isSpinning && !self.dial3.isSpinning && !self.dial4.isSpinning) {
+//    if (!self.dial1.isSpinning && !self.dial2.isSpinning && !self.dial3.isSpinning && !self.dial4.isSpinning)
+	NSLog(@"%d %d",!self.dial1.isContentMoving && !self.dial2.isContentMoving && !self.dial3.isContentMoving && !self.dial4.isContentMoving,!self.dial1.isSpinning && !self.dial2.isSpinning && !self.dial3.isSpinning && !self.dial4.isSpinning);
+	if (!self.dial1.isContentMoving && !self.dial2.isContentMoving && !self.dial3.isContentMoving && !self.dial4.isContentMoving)
+	{
         NSString *selectedString = [NSString stringWithFormat:@"%@%@%@%@", self.dial1.selectedString, self.dial2.selectedString, self.dial3.selectedString, self.dial4.selectedString];
         
-        NSLog(@"selected string = %@", selectedString);
+//        NSLog(@"selected string = %@", selectedString);
         
         //if our preset strings are not nil, we want to snap to those
         if (self.presetStrings != nil) {
@@ -135,6 +149,10 @@
             [[self delegate] multiDialViewController:self didSelectString:selectedString];
         }
     }
+	else
+	{
+		[self.delegate multiDialViewControllerStartScroll:self];
+	}
 }
 
 #pragma mark -

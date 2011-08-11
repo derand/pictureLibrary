@@ -30,6 +30,7 @@
 @property (nonatomic, retain) NSArray *presetStrings;
 
 @property (nonatomic, assign) NSInteger number;
+@property (nonatomic, readonly) BOOL isContentMoving;
 
 - (void)spinToRandomString:(BOOL)preset;
 
@@ -38,4 +39,5 @@
 
 @protocol MultiDialViewControllerDelegate 
 - (void)multiDialViewController:(MultiDialViewController *)controller didSelectString:(NSString *)string;
+- (void)multiDialViewControllerStartScroll:(MultiDialViewController *)controller;
 @end

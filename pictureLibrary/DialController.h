@@ -24,6 +24,7 @@
 
 @property (readonly) NSInteger selectedStringIndex;
 @property BOOL isSpinning;
+@property (nonatomic, readonly) BOOL isContentMoving;
 
 @property (nonatomic, assign) id<DialControllerDelegate> delegate;
 
@@ -38,4 +39,6 @@
 - (void)dialControllerDidSpin:(DialController *)controller;
 @required
 - (void)dialController:(DialController *)dial didSnapToString:(NSString *)string;
+
+- (void) dialControllerDidStartDragiing:(DialController *)dial;
 @end
