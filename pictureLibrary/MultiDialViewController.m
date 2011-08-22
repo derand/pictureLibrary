@@ -106,7 +106,6 @@
 
 - (void) dialControllerDidStartDragiing:(DialController *)dial
 {
-	NSLog(@"%s", __FUNCTION__);
 	[self.delegate multiDialViewControllerStartScroll:self];
 }
 
@@ -118,7 +117,6 @@
 //    NSLog(@"%@>%@", [self class], NSStringFromSelector(_cmd));
     
 //    if (!self.dial1.isSpinning && !self.dial2.isSpinning && !self.dial3.isSpinning && !self.dial4.isSpinning)
-	NSLog(@"%d %d",!self.dial1.isContentMoving && !self.dial2.isContentMoving && !self.dial3.isContentMoving && !self.dial4.isContentMoving,!self.dial1.isSpinning && !self.dial2.isSpinning && !self.dial3.isSpinning && !self.dial4.isSpinning);
 	if (!self.dial1.isContentMoving && !self.dial2.isContentMoving && !self.dial3.isContentMoving && !self.dial4.isContentMoving)
 	{
         NSString *selectedString = [NSString stringWithFormat:@"%@%@%@%@", self.dial1.selectedString, self.dial2.selectedString, self.dial3.selectedString, self.dial4.selectedString];
