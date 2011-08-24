@@ -92,6 +92,7 @@
 {
 	if (mdvc.number!=page)
 	{
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(changeNumber) object:nil];
 		mdvc.number = page;
 	}
 }
