@@ -34,7 +34,6 @@
 		self.showsVerticalScrollIndicator = YES;
 		self.showsHorizontalScrollIndicator = YES;
 		self.scrollsToTop = NO;
-		self.delegate = self;
 		
 		rScale = previousScale = 1.0;
 		

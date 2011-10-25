@@ -77,7 +77,7 @@
 	}
 }
 
-- (void) unshowAnimated:(BOOL) animated
+- (void) hideAnimated:(BOOL) animated
 {
 	if (animated)
 	{
@@ -98,6 +98,11 @@
 }
 
 - (void) setViewSizeInFrame:(CGRect) frame
+{
+	[self setViewSizeInFrame:frame animated:NO];
+}
+
+- (void) setViewSizeInFrame:(CGRect) frame animated:(BOOL) animated
 {
 	_savedFrame = frame;
 	CGSize sz = self.needSize;
@@ -141,7 +146,19 @@
 		rct.origin.y -= parent.toolBar.frame.size.height;
 	}
 */
-	self.frame = rct;
+	if (animated)
+	{
+		[UIView animateWithDuration:.3f
+						 animations:^{
+							 self.frame = rct;
+						 }
+						 completion:^(BOOL finished) {
+						 }];
+	}
+	else
+	{
+		self.frame = rct;
+	}
 	
 	[self setNeedsDisplay];
 }

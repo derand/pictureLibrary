@@ -50,8 +50,9 @@ typedef enum
 
 
 - (void) showInView:(UIView *) _view animated:(BOOL) animated;
-- (void) unshowAnimated:(BOOL) animated;
+- (void) hideAnimated:(BOOL) animated;
 
 - (void) setViewSizeInFrame:(CGRect) frame;
+- (void) setViewSizeInFrame:(CGRect) frame animated:(BOOL) animated;
 
 @end

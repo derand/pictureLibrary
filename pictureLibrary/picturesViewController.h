@@ -27,6 +27,8 @@
 
 - (NSString *) picturesViewController:(picturesViewController *) sender titleForImage:(NSInteger) idx;
 - (void) picturesViewController:(picturesViewController *) sender titleTouched:(NSInteger) idx;
+
+- (void) picturesViewControllerChangeBarsFrame:(picturesViewController *) sender;
 @end
 
 

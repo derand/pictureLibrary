@@ -213,6 +213,7 @@
 	}
 
 //	if (index<pageStart+1 && index>pageEnd-1 )
+	if (pagesView)
 	{
 		CGPoint offset = CGPointZero;
 		CGSize size = CGSizeMake(0.0, pagesView.bounds.size.height);
@@ -469,6 +470,10 @@
 						 [self setToolBarFrame];
 					 }
 					 completion:^(BOOL finished) {
+						 if ([delegate respondsToSelector:@selector(picturesViewControllerChangeBarsFrame:)])
+						 {
+							 [delegate picturesViewControllerChangeBarsFrame:self];
+						 }
 					 }];
 
 	progRotation = YES;

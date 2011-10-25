@@ -32,8 +32,9 @@
     self = [super initWithFrame:frame];
     if (self)
 	{
-        // Initialization code
 		self.backgroundColor = [UIColor clearColor];
+		self.verticalAlign = verticalViewAlignBottom;
+		self.horizontalAlign = horizontalViewAlignRight;
 		
 		tv = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
 		tv.backgroundColor = [UIColor clearColor];
@@ -94,6 +95,7 @@
 	{
 		[tv reloadData];
 	}
+	[self setViewSizeInFrame:self.superview.bounds animated:YES];
 }
 
 - (CGSize) needSize
