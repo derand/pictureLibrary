@@ -85,6 +85,12 @@
 	[titleBtn setTitle:title forState:UIControlStateNormal];
 }
 
+- (UIButton *) titleButton
+{
+	return titleBtn;
+}
+
+
 - (void) titleButtonAction:(UIButton *) sender
 {
 	if ([delegate respondsToSelector:@selector(picturesViewController:titleTouched:)])
@@ -106,7 +112,7 @@
 
 - (pageView *) pageByIdx:(NSInteger) idx
 {
-	pageView *page;
+	pageView *page = nil;
 	NSInteger i;
 	for (i=0; i<[pages count]; i++)
 	{
@@ -183,17 +189,18 @@
 			[self setNavigationTitle:[NSString stringWithFormat:NSLocalizedString(@"%d/%d", @""), index+1, count]];
 		}
 	}
-	
+
 	[self freeMemmoryWithAbs:3];
 }
 
 - (void) setIndex:(NSInteger) _index animated:(BOOL) animated
 {
+/*
 	if (count==0 && delegate)
 	{
 		self.count = [delegate picturesViewControllerPicturesCount:self];
 	}
-	
+*/
 	if (count>=0 && _index>=count)
 		return ;
 	
@@ -516,6 +523,17 @@
 {
 	self.navigationController.navigationBar.barStyle = savedBarStyle;
 	[UIApplication sharedApplication].statusBarStyle = savedStatusBarStyle;
+
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound)
+	{
+		// back button was pressed.  We know this is true because self is no longer
+		// in the navigation stack.  
+		if (delegate && [delegate respondsToSelector:@selector(picturesViewControllerWillDisappear:)])
+		{
+			[delegate picturesViewControllerWillDisappear:self];
+		}
+    }
+    [super viewWillDisappear:animated];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
@@ -532,7 +550,7 @@
 	CGRect rct = [[UIScreen mainScreen] bounds];
 	self.view.frame = rct;
 	
-	rct = self.view.bounds;
+//	rct = self.view.bounds;
 	pagesView.frame = screenRect;
 	pagesView.contentSize = CGSizeMake(pagesView.bounds.size.width*[pages count], pagesView.bounds.size.height);
 	pagesView.contentOffset = CGPointMake(pagesView.bounds.size.width*(index-pageStart), 0.0);

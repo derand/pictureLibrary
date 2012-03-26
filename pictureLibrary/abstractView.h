@@ -39,6 +39,9 @@ typedef enum
 	eVerticalViewAlign verticalAlign;
 	eHorizontalViewAlign horizontalAlign;
 	CGRect _savedFrame;
+	
+	BOOL considerKeyboardBorders;
+	CGSize kbSize;
 }
 
 @property (nonatomic, readonly) CGSize needSize;
@@ -47,6 +50,8 @@ typedef enum
 
 @property (nonatomic, assign) eVerticalViewAlign verticalAlign;
 @property (nonatomic, assign) eHorizontalViewAlign horizontalAlign;
+
+@property (nonatomic, assign) BOOL considerKeyboardBorders;
 
 
 - (void) showInView:(UIView *) _view animated:(BOOL) animated;

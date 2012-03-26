@@ -11,6 +11,10 @@
 		A506CD4B13E084670085E13A /* cTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = A506CD4713E084670085E13A /* cTagsView.m */; };
 		A506CD4C13E084670085E13A /* cTagTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A506CD4813E084670085E13A /* cTagTableCell.h */; };
 		A506CD4D13E084670085E13A /* cTagTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A506CD4913E084670085E13A /* cTagTableCell.m */; };
+		A50ED3991508F53F0013C063 /* cSearchHintView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50ED3971508F53F0013C063 /* cSearchHintView.h */; };
+		A50ED39A1508F53F0013C063 /* cSearchHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50ED3981508F53F0013C063 /* cSearchHintView.m */; };
+		A50ED39D1508F7930013C063 /* cSearchHintTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A50ED39B1508F7930013C063 /* cSearchHintTableCell.h */; };
+		A50ED39E1508F7930013C063 /* cSearchHintTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A50ED39C1508F7930013C063 /* cSearchHintTableCell.m */; };
 		A5143308139AB4AC00E84A0C /* picturesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5143306139AB4AC00E84A0C /* picturesViewController.h */; };
 		A5143309139AB4AC00E84A0C /* picturesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5143307139AB4AC00E84A0C /* picturesViewController.m */; };
 		A5143366139AC25E00E84A0C /* pageView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5143364139AC25E00E84A0C /* pageView.h */; };
@@ -28,6 +32,7 @@
 		A586C2EA13E83BA6003962EF /* MultiDialViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A586C2E413E83BA6003962EF /* MultiDialViewController.h */; };
 		A586C2EB13E83BA6003962EF /* MultiDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A586C2E513E83BA6003962EF /* MultiDialViewController.m */; };
 		A5DEAE79139A9214000D8D8B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DEAE78139A9214000D8D8B /* Foundation.framework */; };
+		A5EB964A151CB3DA0089BE62 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EB9649151CB3DA0089BE62 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +40,10 @@
 		A506CD4713E084670085E13A /* cTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cTagsView.m; sourceTree = "<group>"; };
 		A506CD4813E084670085E13A /* cTagTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cTagTableCell.h; sourceTree = "<group>"; };
 		A506CD4913E084670085E13A /* cTagTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cTagTableCell.m; sourceTree = "<group>"; };
+		A50ED3971508F53F0013C063 /* cSearchHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cSearchHintView.h; sourceTree = "<group>"; };
+		A50ED3981508F53F0013C063 /* cSearchHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cSearchHintView.m; sourceTree = "<group>"; };
+		A50ED39B1508F7930013C063 /* cSearchHintTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cSearchHintTableCell.h; sourceTree = "<group>"; };
+		A50ED39C1508F7930013C063 /* cSearchHintTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cSearchHintTableCell.m; sourceTree = "<group>"; };
 		A5143306139AB4AC00E84A0C /* picturesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picturesViewController.h; sourceTree = "<group>"; };
 		A5143307139AB4AC00E84A0C /* picturesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = picturesViewController.m; sourceTree = "<group>"; };
 		A5143364139AC25E00E84A0C /* pageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pageView.h; sourceTree = "<group>"; };
@@ -54,6 +63,7 @@
 		A5DEAE75139A9214000D8D8B /* libpictureLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpictureLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DEAE78139A9214000D8D8B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A5DEAE7C139A9214000D8D8B /* pictureLibrary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pictureLibrary-Prefix.pch"; sourceTree = "<group>"; };
+		A5EB9649151CB3DA0089BE62 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5EB964A151CB3DA0089BE62 /* QuartzCore.framework in Frameworks */,
 				A5DEAE79139A9214000D8D8B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +90,17 @@
 			name = tags;
 			sourceTree = "<group>";
 		};
+		A50ED3951508F4ED0013C063 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				A50ED3971508F53F0013C063 /* cSearchHintView.h */,
+				A50ED3981508F53F0013C063 /* cSearchHintView.m */,
+				A50ED39B1508F7930013C063 /* cSearchHintTableCell.h */,
+				A50ED39C1508F7930013C063 /* cSearchHintTableCell.m */,
+			);
+			name = search;
+			sourceTree = "<group>";
+		};
 		A542440A13E0900900EE4097 /* view's */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +108,7 @@
 				A542440613E08FFE00EE4097 /* abstractView.m */,
 				A506CD4413E0844B0085E13A /* tags */,
 				A586C2D113E71D9B003962EF /* pages */,
+				A50ED3951508F4ED0013C063 /* search */,
 			);
 			name = "view's";
 			sourceTree = "<group>";
@@ -134,6 +157,7 @@
 		A5DEAE77139A9214000D8D8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5EB9649151CB3DA0089BE62 /* QuartzCore.framework */,
 				A5DEAE78139A9214000D8D8B /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -179,6 +203,8 @@
 				A586C2E613E83BA6003962EF /* DialController.h in Headers */,
 				A586C2E813E83BA6003962EF /* GlowLabel.h in Headers */,
 				A586C2EA13E83BA6003962EF /* MultiDialViewController.h in Headers */,
+				A50ED3991508F53F0013C063 /* cSearchHintView.h in Headers */,
+				A50ED39D1508F7930013C063 /* cSearchHintTableCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +269,8 @@
 				A586C2E713E83BA6003962EF /* DialController.m in Sources */,
 				A586C2E913E83BA6003962EF /* GlowLabel.m in Sources */,
 				A586C2EB13E83BA6003962EF /* MultiDialViewController.m in Sources */,
+				A50ED39A1508F53F0013C063 /* cSearchHintView.m in Sources */,
+				A50ED39E1508F7930013C063 /* cSearchHintTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

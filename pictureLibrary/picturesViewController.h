@@ -29,6 +29,7 @@
 - (void) picturesViewController:(picturesViewController *) sender titleTouched:(NSInteger) idx;
 
 - (void) picturesViewControllerChangeBarsFrame:(picturesViewController *) sender;
+- (void) picturesViewControllerWillDisappear:(picturesViewController *) sender;
 @end
 
 
@@ -71,5 +72,6 @@
 - (void) setImage:(UIImage *) _image forIndex:(NSInteger) idx;
 
 - (void) addSubview:(abstractView *) subview;
+- (UIButton *) titleButton;
 
 @end

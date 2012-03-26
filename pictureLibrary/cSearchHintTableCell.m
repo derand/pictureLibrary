@@ -1,24 +1,24 @@
 //
-//  tagTableCell.m
-//  Amagami
+//  cSearchHintTableCell.m
+//  pictureLibrary
 //
-//  Created by Andrey Derevyagin on 7/1/11.
-//  Copyright 2011 interMobile. All rights reserved.
+//  Created by Andrey Derevyagin on 3/8/12.
+//  Copyright (c) 2012 interMobile. All rights reserved.
 //
 
-#import "cTagTableCell.h"
+#import "cSearchHintTableCell.h"
 
 
-#define TEXT_FONT	[UIFont boldSystemFontOfSize:12.0]
+#define TEXT_FONT	[UIFont boldSystemFontOfSize:14.0]
 
 
-@interface cTagTableCell ()
+@interface cSearchHintTableCell ()
 @property (nonatomic, retain) UILabel *nameLabel;
 @end
 
 
 
-@implementation cTagTableCell
+@implementation cSearchHintTableCell
 @synthesize nameLabel;
 
 #pragma mark lifeCycle
@@ -35,9 +35,9 @@
 		nameLabel.backgroundColor = [UIColor clearColor];
 		nameLabel.opaque = NO;
 		nameLabel.textColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-//		nameLabel.textColor = [UIColor colorWithRed:63.0/256.0 green:65.0/256.0 blue:67.0/256.0 alpha:1.0];
+		//		nameLabel.textColor = [UIColor colorWithRed:63.0/256.0 green:65.0/256.0 blue:67.0/256.0 alpha:1.0];
 		nameLabel.font = TEXT_FONT;
-//		nameLabel.font = [UIFont boldSystemFontOfSize:<#(CGFloat)#>];
+		//		nameLabel.font = [UIFont boldSystemFontOfSize:<#(CGFloat)#>];
         nameLabel.textAlignment = UITextAlignmentCenter;
 		[self.contentView addSubview:nameLabel];
 	}
@@ -53,21 +53,21 @@
 
 #pragma mark -
 
-- (void) setTagName:(NSString *) _tagName
+- (void) setHint:(NSString *)hint
 {
-	nameLabel.text = _tagName;
+	nameLabel.text = hint;
 	[self layoutSubviews];
 }
 
-- (NSString *) tagName
+- (NSString *) hint
 {
 	return nameLabel.text;
 }
 
-+ (CGSize) sizeForTag:(NSString *) tag
++ (CGSize) sizeForHint:(NSString *)hint
 {
-	CGSize rv = [tag sizeWithFont:TEXT_FONT];
-	rv.height += 2.0;
+	CGSize rv = [hint sizeWithFont:TEXT_FONT];
+	rv.height += 10.0;
 	return rv;
 }
 
@@ -80,17 +80,6 @@
 	CGRect contentRect = [self.contentView bounds];
 	
 	nameLabel.frame = contentRect;
-/*	
-	CGFloat diff = contentRect.size.width*.02;
-	CGRect rct;
-	CGSize sz;
-	
-	sz = [nameLabel.text sizeWithFont:caption.font constrainedToSize:CGSizeMake(contentRect.size.width, contentRect.size.height)];
-	rct = CGRectMake(contentRect.origin.x, contentRect.size.height-sz.height-diff,
-					 contentRect.size.width, sz.height);
-	nameLabel.frame = rct;
-*/
 }
-
 
 @end

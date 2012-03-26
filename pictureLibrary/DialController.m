@@ -179,7 +179,8 @@ static const int kGlowLabelTag = 2011;
     
     UITableViewCell *cell = (UITableViewCell *)[aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, self.tableView.rowHeight) reuseIdentifier:CellIdentifier] autorelease];
+//        cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, self.tableView.rowHeight) reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         //make the cell unselectable
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         

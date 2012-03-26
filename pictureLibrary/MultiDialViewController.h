@@ -19,7 +19,6 @@
     //optional array of preset values
 	NSArray *presetStrings;
 	
-	NSInteger max;
 }
 
 @property (nonatomic, assign) id<MultiDialViewControllerDelegate> delegate;
@@ -33,7 +32,6 @@
 
 @property (nonatomic, assign) NSInteger number;
 @property (nonatomic, readonly) BOOL isContentMoving;
-//@property (nonatomic, assign) NSInteger max;
 
 - (void)spinToRandomString:(BOOL)preset;
 

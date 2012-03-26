@@ -19,6 +19,7 @@
 @synthesize parent;
 @synthesize showed;
 @synthesize verticalAlign, horizontalAlign;
+@synthesize considerKeyboardBorders;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -29,6 +30,8 @@
 		showed = NO;
 		verticalAlign = verticalViewAlignNone;
 		horizontalAlign = horizontalViewAlignNone;
+		
+		considerKeyboardBorders = NO;
     }
     return self;
 }
@@ -44,6 +47,9 @@
 
 - (void) dealloc
 {
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 	self.parent = nil;
 	
 	[super dealloc];
@@ -60,7 +66,17 @@
 {
 	self.alpha = animated?0.0:1.0;
 
+	
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWasShown:)
+												 name:UIKeyboardDidShowNotification object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillBeHidden:)
+												 name:UIKeyboardWillHideNotification object:nil];
+
 	[_view addSubview:self];
+	showed = YES;
 	if (animated)
 	{
 		[UIView animateWithDuration:SHOW_DURATION
@@ -68,17 +84,21 @@
 							 self.alpha = 1.0;
 						 }
 						 completion:^(BOOL finished) {
-							 showed = YES;
 						 }];
-	}
-	else
-	{
-		showed = YES;
 	}
 }
 
 - (void) hideAnimated:(BOOL) animated
 {
+	if (!showed)
+	{
+		return;
+	}
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+	
+	showed = NO;
 	if (animated)
 	{
 		[UIView animateWithDuration:SHOW_DURATION
@@ -87,13 +107,11 @@
 						 }
 						 completion:^(BOOL finished) {
 							 [self removeFromSuperview];
-							 showed = NO;
 						 }];
 	}
 	else
 	{
 		[self removeFromSuperview];
-		showed = NO;
 	}
 }
 
@@ -106,7 +124,16 @@
 {
 	_savedFrame = frame;
 	CGSize sz = self.needSize;
-	sz.height = MIN(sz.height, frame.size.height-2.0*BORDER_DIFF-2.5*(parent.barsShowed?parent.toolBar.frame.size.height:0.0));
+	CGFloat max_height = frame.size.height-2.0*BORDER_DIFF-2.5*(parent.barsShowed?parent.toolBar.frame.size.height:0.0);
+	if (considerKeyboardBorders)
+	{
+		max_height -= UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)?kbSize.width:kbSize.height;
+		if (parent.barsShowed)
+		{
+			max_height += parent.toolBar.frame.size.height;
+		}
+	}
+	sz.height = MIN(sz.height, max_height);
 	CGRect rct = CGRectZero;
 	rct.size = sz;
 	switch (self.horizontalAlign)
@@ -139,13 +166,7 @@
 		default:
 			break;
 	}
-/*	
-	CGRectMake(frame.size.width-BORDER_DIFF-sz.width, frame.size.height-sz.height-BORDER_DIFF, sz.width, sz.height);
-	if (parent.barsShowed)
-	{
-		rct.origin.y -= parent.toolBar.frame.size.height;
-	}
-*/
+
 	if (animated)
 	{
 		[UIView animateWithDuration:.3f
@@ -182,5 +203,25 @@
 		[self setViewSizeInFrame:_savedFrame];
 	}
 }
+
+
+#pragma mark keyboard notifications
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+	NSDictionary* info = [aNotification userInfo];
+	kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+	
+	if (showed)
+	{
+		[self setViewSizeInFrame:_savedFrame animated:YES];
+	}
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+	kbSize = CGSizeZero;
+}
+
 
 @end

@@ -17,7 +17,6 @@
 
 @synthesize presetStrings, delegate;
 @synthesize dial1, dial2, dial3, dial4;
-//@synthesize max;
 
 
 #pragma mark lifeCycle
@@ -25,10 +24,6 @@
 - (id) init
 {
 	self = [super init];
-	if (!self)
-	{
-		max = -1;
-	}
 	return self;
 }
 
